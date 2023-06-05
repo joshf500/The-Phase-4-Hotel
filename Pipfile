@@ -6,9 +6,16 @@ name = "pypi"
 [packages]
 flask = "*"
 flask-sqlalchemy = "*"
-flask-migrate = "*"
 sqlalchemy-serializer = "*"
+flask-migrate = "*"
 flask-restful = "*"
+importlib-metadata = "6.0.0"
+importlib-resources = "5.10.0"
+pytest = "7.2.0"
+sqlalchemy = "2.5.1"
+flask-bcrypt = "1.0.1"
+faker = "==15.3.2"
+config = "*"
 flask-cors = "*"
 
 [dev-packages]
