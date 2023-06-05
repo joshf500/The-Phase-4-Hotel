@@ -60,6 +60,6 @@ class Booking(db.Model, SerializerMixin):
 
     serialize_rules = ("-user.bookings", "-room.bookings")
 
-     def __repr__(self):
-            return f"<Booking {self.id}>"
+    def __repr__(self):
+        return f"<Booking {self.id}>"
 
