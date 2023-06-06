@@ -5,7 +5,12 @@ import React from "react";
 function RoomCard(){
 
     return(
-         <h1> place holder for jsx</h1>
+         <li className="RoomCard">
+            <img src="" />
+            <div className="RoomCardTextContainer">
+
+            </div>
+         </li>
     )
 }
 
