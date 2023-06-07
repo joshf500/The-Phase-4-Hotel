@@ -61,16 +61,11 @@ function Login({ onLogin }) {
           >
             Login
             <span className="auth-title-underline"></span>
-
           </button>
-          {/* the above section of code is for the cards  inwhich the form  is held */}
-
-
           <form className="AuthForm form-login" onSubmit={handleSubmit}>
             <fieldset>
               <div className="input-block">
                 <label htmlFor="login-username">Username</label>
-
                 <input
                   id="login-username"
                   placeholder="Enter your username"
@@ -82,7 +77,6 @@ function Login({ onLogin }) {
               </div>
               <div className="input-block">
                 <label htmlFor="login-password">Password</label>
-                
                 <input
                   id="login-password"
                   placeholder="Enter password"
