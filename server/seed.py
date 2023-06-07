@@ -35,14 +35,18 @@ if __name__ == '__main__':
                 username = fake.first_name()
             usernames.append(username)
 
+            email = fake.email()
+            while email in emails:
+                email = fake.email()
+            emails.append(email)
+
             user = User(
                 username=username,
-                email = fake.email(),
+                email = email,
                 _password_hash = fake.password()
             )
 
             user.password_hash = user.username + 'password'
-
             users.append(user)
         db.session.add_all(users)
 
@@ -73,6 +77,7 @@ if __name__ == '__main__':
                     price = randint(190,200)
                 else:
                     price = randint(210,220) 
+
                 image_url = "https://pintsizepilot.com/wp-content/uploads/San-Carlos-Hotel.png"
                 queen_beds = 2
                 couch_pullout_beds = 1
