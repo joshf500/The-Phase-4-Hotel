@@ -7,6 +7,7 @@ function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +32,10 @@ function Login({ onLogin }) {
     })
       .then((response) => {
         if (response.ok) {
-          response.json().then((user) => onLogin(user));
+          response.json().then((user) => {
+            onLogin(user);
+            setIsLoggedIn(true); // Update login status
+          });
         } else {
           response.json().then((err) => setErrors(err.errors));
         }
@@ -39,6 +43,10 @@ function Login({ onLogin }) {
       .catch((error) => {
         console.error("An error occurred:", error);
       });
+  };
+
+  const handleClick = () => {
+    setIsLoggedIn(true); // Update login status
   };
 
   return (
@@ -53,11 +61,16 @@ function Login({ onLogin }) {
           >
             Login
             <span className="auth-title-underline"></span>
+
           </button>
+          {/* the above section of code is for the cards  inwhich the form  is held */}
+
+
           <form className="AuthForm form-login" onSubmit={handleSubmit}>
             <fieldset>
               <div className="input-block">
                 <label htmlFor="login-username">Username</label>
+
                 <input
                   id="login-username"
                   placeholder="Enter your username"
@@ -69,6 +82,7 @@ function Login({ onLogin }) {
               </div>
               <div className="input-block">
                 <label htmlFor="login-password">Password</label>
+                
                 <input
                   id="login-password"
                   placeholder="Enter password"
@@ -79,10 +93,11 @@ function Login({ onLogin }) {
                 />
               </div>
             </fieldset>
-            <button type="submit" className="btn-login">Login</button>
+            <button type="submit" className="btn-login" onClick={handleClick}>Login</button>
           </form>
         </div>
       </div>
+      {isLoggedIn && <div>You are now logged in!</div>}
     </section>
   );
 }
