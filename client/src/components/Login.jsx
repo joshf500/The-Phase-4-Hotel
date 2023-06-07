@@ -41,6 +41,50 @@ function Login({ onLogin }) {
       });
   };
 
- 
+  return (
+    <section className="auth-forms-section">
+      <h1 className="auth-section-title">your getaway awaits</h1>
+      <div className="auth-forms">
+        <div className={`auth-form-wrapper ${activeForm === 'login' ? 'is-active' : ''}`}>
+          <button
+            type="button"
+            className="switcher auth-switcher-login"
+            onClick={() => setActiveForm('login')}
+          >
+            Login
+            <span className="auth-title-underline"></span>
+          </button>
+          <form className="AuthForm form-login" onSubmit={handleSubmit}>
+            <fieldset>
+              <div className="input-block">
+                <label htmlFor="login-username">Username</label>
+                <input
+                  id="login-username"
+                  placeholder="Enter your username"
+                  type="text"
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className="input-block">
+                <label htmlFor="login-password">Password</label>
+                <input
+                  id="login-password"
+                  placeholder="Enter password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </fieldset>
+            <button type="submit" className="btn-login">Login</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default Login;
