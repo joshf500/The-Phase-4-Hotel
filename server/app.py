@@ -7,10 +7,12 @@ from flask import Flask, request, session, make_response, jsonify
 from flask_migrate import Migrate
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
+from flask_bcrypt import Bcrypt
 
 # Local imports
 from models import User, db
 import ipdb
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
