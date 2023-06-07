@@ -1,11 +1,18 @@
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker from 'react-modern-calendar-datepicker';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const CalanderForm = () => {
   const [guests, setGuests] = useState(1);
   const [selectedDays, setSelectedDays] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      // Cleanup function to remove event listeners
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleGuestsChange = (e) => {
     setGuests(parseInt(e.target.value));
@@ -25,15 +32,12 @@ const CalanderForm = () => {
       endDate: selectedDays ? selectedDays.to : null,
     };
 
-//Update!!!
-    fetch('/api/bookings', { //Update!!!
+    fetch('/api/bookings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData), 
-//Update!!!
-
+      body: JSON.stringify(formData),
     })
       .then((response) => {
         setIsLoading(false);
