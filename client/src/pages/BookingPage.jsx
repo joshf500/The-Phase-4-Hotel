@@ -1,10 +1,10 @@
 import React from 'react';
+import ParallaxHeader from '../components/ParallaxHeader';
 
 const BookingPage = () => {
   return (
     <div>
-      <h2>Booking Page</h2>
-      {/* Add your booking form or other content here */}
+      <ParallaxHeader />
     </div>
   );
 };

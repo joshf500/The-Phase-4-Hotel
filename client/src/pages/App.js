@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import '../styles/styled.css';
+import '../styles/Nav.css';
 
 import BookingPage from './BookingPage';
 import UserPage from  './UserPage';
@@ -10,20 +11,22 @@ import Header from "../components/Header";
 
 function App() {
   return (
-    <div id="App"> 
+    <div id="App">
       <Router>
-        <nav>
-          <ul className="navBar">
-            <li>
-              <Link to='/'>home</Link>
-            </li>
-            <li>
-              <Link to='/pages/BookingPage'> Book Now </Link>
-            </li>
-            <li>
-              <Link to='/pages/UserPage'> UserPage </Link>
-            </li>
-          </ul>
+        <nav className="navBar">
+        <div className="navBar__indicator">
+            <ul>
+              <li>
+                <Link to="/">home</Link>
+              </li>
+              <li>
+                <Link to="/pages/BookingPage"> Book Now </Link>
+              </li>
+              <li>
+                <Link to="/pages/UserPage"> Login </Link>
+              </li>
+            </ul>
+          </div>
         </nav>
 
         <Switch>
@@ -37,3 +40,7 @@ function App() {
 }
 
 export default App;
+
+
+
+

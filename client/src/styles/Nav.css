@@ -1,0 +1,20 @@
+.navBar {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navBar__indicator ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .navBar__indicator li {
+    margin-right: 10px;
+  }
+  
+  .navBar__indicator li:last-child {
+    margin-right: 0;
+  }
+  
