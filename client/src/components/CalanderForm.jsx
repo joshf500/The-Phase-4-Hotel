@@ -2,7 +2,7 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker from 'react-modern-calendar-datepicker';
 import { useState } from 'react';
 
-const BookingForm = () => {
+const CalanderForm = () => {
   const [guests, setGuests] = useState(1);
   const [selectedDays, setSelectedDays] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,12 +25,15 @@ const BookingForm = () => {
       endDate: selectedDays ? selectedDays.to : null,
     };
 
+//Update!!!
     fetch('/api/bookings', { //Update!!!
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(formData), 
+//Update!!!
+
     })
       .then((response) => {
         setIsLoading(false);
@@ -74,4 +77,4 @@ const BookingForm = () => {
   );
 };
 
-export default BookingForm;
+export default CalanderForm;
