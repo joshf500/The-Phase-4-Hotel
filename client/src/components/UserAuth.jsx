@@ -22,18 +22,20 @@ function UserAuth({ onLogin }) {
     let url;
     let requestData;
 
+    // REMINDER to  update the paths to the sql database 
+
     if (activeForm === 'login') {
-      url = '/login';
-      requestData = { email, password };
+      url = 'api/login';  // update
+      requestData = { user_email: email, user_password: password  }; // revise to match database
     } else if (activeForm === 'signup') {
-      url = '/signup';
-      requestData = { email, password, password_confirmation: confirmPassword };
+      url = 'api/signup';  // update
+      requestData = { user_email: email, user_password: password, password_confirmation: confirmPassword }; // revise to match database
     }
 
     fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json', // UPDATE !!
       },
       body: JSON.stringify(requestData),
     })
