@@ -16,8 +16,6 @@ function UserAuth({ onLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
-    setIsLoading(true);
 
     let url;
     let requestData;
@@ -30,7 +28,7 @@ function UserAuth({ onLogin }) {
       requestData = { email, username: email, password, password_confirmation: confirmPassword };
     }
 
-    fetch(url, {
+    fetch("/server/app.py", {
       method: 'POST',
       headers: {
         'Content-Type': '/server/app.py',
@@ -45,61 +43,10 @@ function UserAuth({ onLogin }) {
           response.json().then((err) => setErrors(err.errors));
         }
       })
-      .catch((error) => {
-        setIsLoading(false);
-        console.error('An error occurred:', error);
-      });
   };
 
   return (
-    <section className="auth-forms-section">
-      <h1 className="auth-section-title">your getaway awaits</h1>
-      <div className="auth-forms">
-        <div className={`auth-form-wrapper ${activeForm === 'login' ? 'is-active' : ''}`}>
-          <button
-            type="button"
-            className="switcher auth-switcher-login"
-            onClick={() => handleSwitchForm('login')}
-          >
-            Login
-            <span className="auth-title-underline"></span>
-          </button>
-          <form className="AuthForm form-login" onSubmit={handleSubmit}>
-            <fieldset>
-              <legend>Please, enter your email and password for login.</legend>
-              <div className="input-block">
-                <label htmlFor="login-email">E-mail</label>
-                <input 
-                  id="login-email"
-                  type="email" required 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="input-block">
-                <label htmlFor="login-password">Password</label>
-                <input 
-                  id="login-password"
-                  type="password" required 
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </fieldset>
-            <button type="submit" className="btn-login" disabled={isLoading}>
-              {isLoading ? 'Logging in...' : 'Login'}
-            </button>
-            {errors.length > 0 && (
-              <div className="error-messages">
-                <ul>
-                  {errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </form>
-        </div>
+        
         <div className={`auth-form-wrapper ${activeForm === 'signup' ? 'is-active' : ''}`}>
           <button
             type="button"
@@ -154,8 +101,6 @@ function UserAuth({ onLogin }) {
             )}
           </form>
         </div>
-      </div>
-    </section>
   );
 }
 
