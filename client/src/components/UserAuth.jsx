@@ -14,7 +14,7 @@ function UserAuth({ onLogin }) {
     setErrors([]);
   };
 
-  const handleAuthFormSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
     setIsLoading(true);
@@ -64,7 +64,7 @@ function UserAuth({ onLogin }) {
             Login
             <span className="auth-title-underline"></span>
           </button>
-          <form className="AuthForm form-login" onSubmit={handleAuthFormSubmit}>
+          <form className="AuthForm form-login" onSubmit={handleSubmit}>
             <fieldset>
               <legend>Please, enter your email and password for login.</legend>
               <div className="input-block">
@@ -109,7 +109,7 @@ function UserAuth({ onLogin }) {
             Sign Up
             <span className="auth-title-underline"></span>
           </button>
-          <form className="AuthForm form-signup" onSubmit={handleAuthFormSubmit}>
+          <form className="AuthForm form-signup" onSubmit={handleSubmit}>
             <fieldset>
               <legend>Please, enter your email, password, and password confirmation for sign up.</legend>
               <div className="input-block">
