@@ -4,7 +4,7 @@ import ParallaxHeader from '../components/ParallaxHeader';
 const BookingPage = () => {
   return (
     <div>
-      <ParallaxHeader />
+  
     </div>
   );
 };
