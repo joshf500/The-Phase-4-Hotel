@@ -14,7 +14,7 @@ function UserAuth({ onLogin }) {
     setErrors([]);
   };
 
-  const HandleAuthFormSubmit = (e) => {
+  const handleAuthFormSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
     setIsLoading(true);
@@ -22,20 +22,18 @@ function UserAuth({ onLogin }) {
     let url;
     let requestData;
 
-    // REMINDER to  update the paths to the sql database 
-
     if (activeForm === 'login') {
-      url = 'api/login';  // update
-      requestData = { user_email: email, user_password: password  }; // revise to match database
+      url = '/login'; 
+      requestData = { username: email, password };
     } else if (activeForm === 'signup') {
-      url = 'api/signup';  // update
-      requestData = { user_email: email, user_password: password, password_confirmation: confirmPassword }; // revise to match database
+      url = '/signup'; // Update with the correct endpoint
+      requestData = { email, username: email, password, password_confirmation: confirmPassword };
     }
 
     fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json', // UPDATE !!
+        'Content-Type': '/server/app.py',
       },
       body: JSON.stringify(requestData),
     })
@@ -66,13 +64,13 @@ function UserAuth({ onLogin }) {
             Login
             <span className="auth-title-underline"></span>
           </button>
-          <form className="AuthForm form-login" onSubmit={HandleAuthFormSubmit}>
+          <form className="AuthForm form-login" onSubmit={handleAuthFormSubmit}>
             <fieldset>
               <legend>Please, enter your email and password for login.</legend>
               <div className="input-block">
                 <label htmlFor="login-email">E-mail</label>
                 <input 
-                  id="login-email" // edit
+                  id="login-email"
                   type="email" required 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -81,7 +79,7 @@ function UserAuth({ onLogin }) {
               <div className="input-block">
                 <label htmlFor="login-password">Password</label>
                 <input 
-                  placeholder="login-password" 
+                  id="login-password"
                   type="password" required 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -111,13 +109,13 @@ function UserAuth({ onLogin }) {
             Sign Up
             <span className="auth-title-underline"></span>
           </button>
-          <form className="AuthForm form-signup" onSubmit={HandleAuthFormSubmit}>
+          <form className="AuthForm form-signup" onSubmit={handleAuthFormSubmit}>
             <fieldset>
               <legend>Please, enter your email, password, and password confirmation for sign up.</legend>
               <div className="input-block">
                 <label htmlFor="signup-email">E-mail</label>
                 <input 
-                  placeholder="signup-email"
+                  id="signup-email"
                   type="email" required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -126,7 +124,7 @@ function UserAuth({ onLogin }) {
               <div className="input-block">
                 <label htmlFor="signup-password">Password</label>
                 <input 
-                  placeholder="signup-password" 
+                  id="signup-password"
                   type="password" required 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -135,7 +133,7 @@ function UserAuth({ onLogin }) {
               <div className="input-block">
                 <label htmlFor="signup-password-confirm">Confirm password</label>
                 <input 
-                  id="signup-password-confirm" 
+                  id="signup-password-confirm"
                   type="password" required 
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -162,5 +160,3 @@ function UserAuth({ onLogin }) {
 }
 
 export default UserAuth;
-
-
