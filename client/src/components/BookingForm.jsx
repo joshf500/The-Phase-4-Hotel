@@ -37,54 +37,54 @@ function BookingForm() {
         });
     };
 
-  return (
-    <form className="BookingForm" onSubmit={handleSubmit}>
-      <h2>Book a Reservation</h2>
-      <div>
-        <label htmlFor="people" className="BookingInput">
-          Number of People
-        </label>
-        <input
-          id="people"
-          className="BookingInput"
-          type="number"
-          min="1"
-          required
-          value={people}
-          onChange={(e) => setPeople(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="checkIn" className="BookingInput">
-          Check-in Date
-        </label>
-        <DatePicker
-          id="checkIn"
-          className="BookingInput datepicker"
-          selected={checkIn}
-          onChange={(date) => setCheckIn(date)}
-          dateFormat="yyyy-MM-dd"
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="checkOut" className="BookingInput">
-          Check-out Date
-        </label>
-        <DatePicker
-          id="checkOut"
-          className="BookingInput datepicker"
-          selected={checkOut}
-          onChange={(date) => setCheckOut(date)}
-          dateFormat="yyyy-MM-dd"
-          required
-        />
-      </div>
-      <button type="submit" className="BookingButton">
-        Book Reservation
-      </button>
-    </form>
-  );
-}
-
+    return (
+        <form className="BookingForm" onSubmit={handleSubmit}>
+          <h2>Book a Reservation</h2>
+          <div>
+            <label htmlFor="people" className="BookingInput">
+              Number of People
+            </label>
+            <input
+              id="people"
+              className="BookingInput"
+              type="number"
+              min="1"
+              required
+              value={people}
+              onChange={(e) => setPeople(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="checkIn" className="BookingInput">
+              Check-in Date
+            </label>
+            <DatePicker
+              id="checkIn"
+              className="BookingInput datepicker"
+              selected={checkIn}
+              onChange={(date) => setCheckIn(date)}
+              dateFormat="yyyy-MM-dd"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="checkOut" className="BookingInput">
+              Check-out Date
+            </label>
+            <DatePicker
+              id="checkOut"
+              className="BookingInput datepicker"
+              selected={checkOut}
+              onChange={(date) => setCheckOut(date)}
+              dateFormat="yyyy-MM-dd"
+              required
+            />
+          </div>
+          <button type="submit" className="BookingButton">
+            Book Reservation
+          </button>
+        </form>
+      );
+    }
+    
 export default BookingForm;
