@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../styles/Auth.css"
 
 function UserAuth({ onLogin }) {
-  const [activeForm, setActiveForm] = useState('login');
+  const [activeForm, setActiveForm] = useState('login ');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -10,7 +10,7 @@ function UserAuth({ onLogin }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSwitchForm = (formType) => {
- /*   setActiveForm(formType); */ 
+    setActiveForm(formType);
     sethandleSubmit(formType);
     setErrors([]);
   };

@@ -95,6 +95,9 @@ function Login({ onLogin }) {
           </div>
         </div>
         {isLoggedIn && <div>You are now logged in!</div>}
+
+
+
       </section>
     </div>
   );
