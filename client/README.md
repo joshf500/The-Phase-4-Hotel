@@ -2,6 +2,8 @@
 
 npm i react-modern-calendar-datepicker 
 
+npm install react-datepicker
+
 
   documentation for calander -- https://kiarash-z.github.io/react-modern-calendar-datepicker/docs/customization
 
