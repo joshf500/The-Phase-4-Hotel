@@ -9,7 +9,7 @@ from faker import Faker
 # Local imports
 from app import app
 from models import db, User, Room, Booking
-import datetime
+from datetime import date, timedelta
 
 if __name__ == '__main__':
     fake = Faker()
@@ -55,7 +55,7 @@ if __name__ == '__main__':
         print("Creating rooms...")
 
         rooms =[]
-        for i in range(20):
+        for i in range(50):
             sleeps = randint(1,6)
             special_view = rc(["Ocean", "City", "None"])
             if sleeps == 1 or sleeps == 2:
@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
             room = Room(
                 price_per_night = price,
-                room_number = randint(1,500),
+                room_number = i+1,
                 sleeps = sleeps,
                 special_view = special_view,
                 image_url = image_url,
@@ -97,23 +97,28 @@ if __name__ == '__main__':
             rooms.append(room)
         db.session.add_all(rooms)
 
+        print("Creating bookings...")
+
         bookings = []
         room_ids=[]
         for i in range(20):
-            room_id = randint(1,20)
+            room_id = randint(1,50)
             while room_id in room_ids:
-                room_id = randint(1,20)
+                room_id = randint(1,50)
             room_ids.append(room_id)
 
             booking = Booking(
-                people = randint(1,6),
-                check_in = datetime.date(randint(2024,2034),randint(1,12),randint(1,28)),
-                check_out = datetime.date(randint(2024,2034),randint(1,12),randint(1,28)),
+                people = randint(1,2),
+                check_in = date(randint(2024,2034),randint(1,12),randint(1,28)),
+                # check_out = datetime.date(randint(2024,2034),randint(1,12),randint(1,28)),
                 user_id = randint(1,20),
                 room_id = room_id,
                 total_price = randint(1,500)
             )
-
+            booking.check_out = booking.check_in + timedelta(days = randint(1,14))
+            # while booking.check_in >= booking.check_out:
+            #     check_in = datetime.date(randint(2024,2034),randint(1,12),randint(1,28))
+            booking.num_nights = (booking.check_out-booking.check_in).days
             bookings.append(booking)
         db.session.add_all(bookings)
         
