@@ -1,5 +1,6 @@
 import React from "react";
 import RoomCard from "./RoomCard.jsx";
+import "../styles/RoomCards.css";
 
 function RoomList({ rooms }) {
   if (!rooms) {
