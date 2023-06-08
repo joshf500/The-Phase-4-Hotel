@@ -18,7 +18,7 @@ function RoomCard() {
   const handleReserveClick = (room) => {
     // Placeholder logic for reserving the room
     console.log("Room reserved:", room);
-    // You can implement your custom logic here, such as sending a request to book the room
+    
   };
 
   return (
