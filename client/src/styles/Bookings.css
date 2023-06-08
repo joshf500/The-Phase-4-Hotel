@@ -1,3 +1,49 @@
+/* booking form */
+.BookingForm {
+  margin-bottom: 20px;
+}
+
+.BookingForm h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.BookingForm div {
+  margin-bottom: 15px;
+}
+
+.BookingForm label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.BookingForm input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.BookingForm .datepicker {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.BookingForm button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.BookingForm button:hover {
+  background-color: #0056b3;
+}
 
 
 /* code for RoomCards, the classnames need to be updated */
