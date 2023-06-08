@@ -17,25 +17,25 @@ function BookingForm() {
     };
 
     fetch("/booking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Handle successful booking
-          console.log("Booking successful");
-        } else {
-          // Handle booking error
-          console.log("Booking error");
-        }
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
       })
-      .catch((error) => {
-        console.error("An error occurred:", error);
-      });
-  };
+        .then((response) => {
+          if (response.ok) {
+            // Handle successful booking
+            console.log("Booking successful");
+          } else {
+            // Handle booking error
+            console.log("Booking error");
+          }
+        })
+        .catch((error) => {
+          console.error("An error occurred:", error);
+        });
+    };
 
   return (
     <form className="BookingForm" onSubmit={handleSubmit}>
