@@ -49,6 +49,7 @@ class Room(db.Model, SerializerMixin):
     couch_pullout_beds = db.Column(db.Integer)
     special_view = db.Column(db.String)
     image_url = db.Column(db.String)
+    available = db.Column(db.Boolean)
 
     bookings =  db.relationship("Booking", back_populates="room")
     users = association_proxy("bookings","user")
