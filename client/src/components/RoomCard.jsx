@@ -44,24 +44,6 @@ function RoomCard({ room }) {
     return <div>Error: {error}</div>;
   }
 
-  return (
-    <li className="card">
-      <img src={room?.image} alt={room?.name} />
-      <h4>{room?.name}</h4>
-      <p>nigtly cost: {price}</p>
-      <p>sleeps {room?.sleeps}</p>
-      {isAvailable ? (
-        <button onClick={handleClick} className="primary">
-          Available
-        </button>
-      ) : (
-        <button onClick={handleClick}>Booked</button>
-      )}
-      <form onSubmit={handleSubmit}>
-        {/* Form fields */}
-      </form>
-    </li>
-  );
-}
+
 
 export default RoomCard;
