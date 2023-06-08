@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Login from "./Login";
 import "../styles/Auth.css";
 
 function SignUpForm({ onSignUp }) {
@@ -115,3 +116,4 @@ function SignUpForm({ onSignUp }) {
 }
 
 export default SignUpForm;
+

@@ -10,7 +10,8 @@ function UserAuth({ onLogin }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSwitchForm = (formType) => {
-    setActiveForm(formType);
+ /*   setActiveForm(formType); */ 
+    sethandleSubmit(formType);
     setErrors([]);
   };
 

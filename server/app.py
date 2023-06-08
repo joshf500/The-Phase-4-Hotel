@@ -112,3 +112,5 @@ class Book(Resource):
                 check_in = request_json.get("check_in"),
                 check_out = request_json.get("check_out")
             )
+        except:
+            pass
