@@ -11,7 +11,11 @@ from sqlalchemy.exc import IntegrityError
 from config import app, db, api
 from models import User, Room, Booking
 import ipdb
+from datetime import date
 
+#Global functions
+def parse_date(datestring):
+    return date(int(datestring[:4]),int(datestring[5:7]),int(datestring[8:]))
 
 # Views go here!
 class Signup(Resource):
@@ -102,21 +106,85 @@ class SeeRooms(Resource):
             return rooms.to_dict(), 200
             
 class Book(Resource):
-
+    
     def post(self):
-        try:
+        
+        # try:
             new_booking = Booking(
-                people = request_json.get("people"),
-                check_in = request_json.get("check_in"),
-                check_out = request_json.get("check_out"),
-                user_id = request_json.get("user_id"),
-                room_id = request_json.get("room_id")
+                people = request.json["people"],
+                check_in =  parse_date(request.json["check_in"]),
+                check_out = parse_date(request.json["check_out"]),
+                user_id = request.json["user_id"],
+                room_id = request.json["room_id"]
             )
+
             db.session.add(new_booking)
             db.session.commit()
+
+            #calculate total_price
+            num_nights = (new_booking.check_out - new_booking.check_in).days
+            print(new_booking.check_out - new_booking.check_in)
+            new_booking.total_price = new_booking.room.price_per_night * num_nights
+            db.session.commit()
+
+            #validate check_out is after check_in
+            if num_nights < 1:
+                db.session.delete(new_booking)
+                db.session.commit()
+                return {'Hold up!': "Checkout must be later date than checkin!"}, 400
+
+            #validate people fit in room
+            if new_booking.people > new_booking.room.sleeps:
+                db.session.delete(new_booking)
+                db.session.commit()
+                return {'Hold up!': "Too many people! Please select larger room!"}, 400
+
+            #validate room is available
+            #query all bookings of this room
+            # room_bookings = Booking.query.filter_by(room_id=new_booking.room_id).all().order_by(Booking.id.asc)[:1]
+            room_bookings = Booking.query.filter_by(room_id=new_booking.room_id).all()[:-1]
+            #return error if new_booking dates overlap with any others
+            print(room_bookings)
+            for booking in room_bookings: 
+                invalid_checkin = new_booking.check_in >= booking.check_in and new_booking.check_in < booking.check_out  
+                invalid_checkout = new_booking.check_out > booking.check_in and new_booking.check_out <= booking.check_out
+                surrounds_prev_booking = new_booking.check_in <= booking.check_in and new_booking.check_out >= booking.check_out
+                print(invalid_checkin)
+                print(invalid_checkout)
+                if invalid_checkin or invalid_checkout or surrounds_prev_booking:
+                    db.session.delete(new_booking)
+                    db.session.commit()
+                    return {'Hold up!': "This room is not available for these dates! Please alter your date range or select a different room!"}, 400
+
+
             return new_booking.to_dict(), 201
-         except:
-            return {'error': "Invalid input"}, 400
+        
+        # except:
+            return {'Error': "Invalid input"}, 400
+
+    
+    def patch(self, id):
+        booking = Booking.query.filter_by(id=id).first()
+        data = request_json.get()
+        for attr in data:
+            setattr(booking, attr, data[attr])
+            
+        db.session.add(booking)
+        db.session.commit()
+
+        return booking.to_dict(), 200
+
+    def delete(self, id):
+        try:
+            booking = Booking.query.filter_by(id=id).first()
+            
+            db.session.delete(delete)
+            db.session.commit()
+
+            return None
+        except:
+            {"error": "Booking not found"}
+    
 
 
 api.add_resource(Signup, '/signup', endpoint='signup')

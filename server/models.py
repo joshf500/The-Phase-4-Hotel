@@ -2,9 +2,9 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
-
+# from datetime import date
 from config import db, bcrypt
-
+from datetime import date
 # Models go here!
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
@@ -49,7 +49,7 @@ class Room(db.Model, SerializerMixin):
     couch_pullout_beds = db.Column(db.Integer)
     special_view = db.Column(db.String)
     image_url = db.Column(db.String)
-    available = db.Column(db.Boolean)
+    available = db.Column(db.Boolean, default=True)
 
     bookings =  db.relationship("Booking", back_populates="room")
     users = association_proxy("bookings","user")

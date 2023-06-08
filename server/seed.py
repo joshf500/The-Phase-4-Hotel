@@ -9,6 +9,7 @@ from faker import Faker
 # Local imports
 from app import app
 from models import db, User, Room, Booking
+import datetime
 
 if __name__ == '__main__':
     fake = Faker()
@@ -18,6 +19,7 @@ if __name__ == '__main__':
         print("Deleting all records...")
         User.query.delete()
         Room.query.delete()
+        Booking.query.delete()
 
         fake = Faker()
 
@@ -84,29 +86,36 @@ if __name__ == '__main__':
 
             room = Room(
                 price_per_night = price,
-                room_number = randint(1,300),
+                room_number = randint(1,500),
                 sleeps = sleeps,
                 special_view = special_view,
                 image_url = image_url,
                 queen_beds = queen_beds,
                 couch_pullout_beds = couch_pullout_beds
             )
-            # if room.sleeps == 1 or 2:
-            #     room.image_url = "https://www.toptreehouses.com/wp-content/uploads/2022/08/treehouse-indonesia.jpeg"
-            #     room.queen_beds = 1
-            #     room.couch_pullout_beds= 0
-            # if room.sleeps == 3 or 4:
-            #     room.image_url = "https://www.efteling.com/en/-/media/images/nieuw-overnachten/hotel/accommodaties-nieuw/comfortkamers-4p/1024x576-efteling-hotel-4-persoons-comfortkamer-overzicht.jpg"
-            #     room.queen_beds = 2
-            #     room.couch_pullout_beds= 0
-            # if room.sleeps == 5 or 6:
-            #     room.image_url = "https://pintsizepilot.com/wp-content/uploads/San-Carlos-Hotel.png"
-            #     room.queen_beds = 2
-            #     room.couch_pullout_beds = 1
-            
-            rooms.append(room)
 
+            rooms.append(room)
         db.session.add_all(rooms)
+
+        bookings = []
+        room_ids=[]
+        for i in range(20):
+            room_id = randint(1,20)
+            while room_id in room_ids:
+                room_id = randint(1,20)
+            room_ids.append(room_id)
+
+            booking = Booking(
+                people = randint(1,6),
+                check_in = datetime.date(randint(2024,2034),randint(1,12),randint(1,28)),
+                check_out = datetime.date(randint(2024,2034),randint(1,12),randint(1,28)),
+                user_id = randint(1,20),
+                room_id = room_id,
+                total_price = randint(1,500)
+            )
+
+            bookings.append(booking)
+        db.session.add_all(bookings)
         
         db.session.commit()
         print("Complete.")
