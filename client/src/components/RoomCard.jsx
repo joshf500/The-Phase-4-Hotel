@@ -14,7 +14,13 @@ function RoomCard() {
         console.error("Error fetching room data:", error);
       });
   }, []);
-  
+
+  const handleReserveClick = (room) => {
+    // Placeholder logic for reserving the room
+    console.log("Room reserved:", room);
+    // You can implement your custom logic here, such as sending a request to book the room
+  };
+
   return (
     <div className="room-cards">
       {rooms.map((room) => (
