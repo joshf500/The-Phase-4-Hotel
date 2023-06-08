@@ -16,7 +16,7 @@ function BookingForm() {
       check_out: checkOut.toISOString(),
     };
 
-    fetch("/booking", {
+    fetch("/book", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
