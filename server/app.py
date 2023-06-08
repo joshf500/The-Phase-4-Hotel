@@ -102,22 +102,20 @@ class SeeRooms(Resource):
             return rooms.to_dict(), 200
             
 class Book(Resource):
-
     def post(self):
         try:
             new_booking = Booking(
-                people = request_json.get("people"),
-                check_in = request_json.get("check_in"),
-                check_out = request_json.get("check_out"),
-                user_id = request_json.get("user_id"),
-                room_id = request_json.get("room_id")
+                people=request_json.get("people"),
+                check_in=request_json.get("check_in"),
+                check_out=request_json.get("check_out"),
+                user_id=request_json.get("user_id"),
+                room_id=request_json.get("room_id")
             )
             db.session.add(new_booking)
             db.session.commit()
             return new_booking.to_dict(), 201
-         except:
+        except:
             return {'error': "Invalid input"}, 400
-
 
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -125,7 +123,6 @@ api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(SeeRooms, '/see_rooms', endpoint='see_rooms')
 api.add_resource(Book, '/book', endpoint='book')
-
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
