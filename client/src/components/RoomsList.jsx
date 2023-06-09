@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RoomCard from "./RoomCard.jsx";
 import "../styles/RoomCards.css";
 
-function RoomList({ rooms }) {
+function RoomList() {
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    fetch("/see_rooms", {
+      method: "GET",
+      headers: {
+        "Content-Type": "Application/json"
+      },
+      body: JSON.stringify()
+    })
+    
+      .then((response) => response.json())
+      .then((data) => {
+        setRooms(data);
+        console.log(data)
+      })
+    
+      .catch((error) => {
+        console.error("Error fetching room data:", error);
+      });
+  }, []);
+
+
   if (!rooms) {
     return null; // Handle the case when rooms are not available
   }

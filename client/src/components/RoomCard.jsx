@@ -1,22 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../styles/RoomCards.css";
 
-function RoomCard() {
-  const [rooms, setRooms] = useState([]);
-
-  useEffect(() => {
-    fetch("/see_rooms")
-      .then((response) => response.json())
-      .then((data) => {
-        setRooms(data.rooms);
-        console.log(data)
-      })
-    
-      .catch((error) => {
-        console.error("Error fetching room data:", error);
-      });
-  }, []);
-
+function RoomCard({ room }) {
+ 
   const handleReserveClick = (room) => {
     // Placeholder logic for reserving the room
     console.log("Room reserved:", room);
@@ -25,7 +11,6 @@ function RoomCard() {
 
   return (
     <div className="room-cards">
-      {rooms.map((room) => (
         <div className="room-card" key={room.id}>
           <img className="room-image" src={room.image_url} alt="Room" />
           <div className="room-details">
@@ -40,7 +25,6 @@ function RoomCard() {
             </button>
           </div>
         </div>
-      ))}
     </div>
   );
 }

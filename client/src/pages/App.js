@@ -11,14 +11,14 @@ import Header from "../components/Header";
 
 function App() {
 
-  const [data, setData] = useState('');
+  // const [data, setData] = useState('');
 
-    useEffect(() => {
-        fetch('/api/data') //  edit 
-            .then(response => response.json())
-            .then(data => setData(data.message))
-            .catch(error => console.error(error));
-    }, []);
+  //   useEffect(() => {
+  //       fetch('/see_rooms') //  edit 
+  //           .then(response => response.json())
+  //           .then(data => setData(data.message))
+  //           .catch(error => console.error(error));
+  //   }, []);
 
   return (
     <div id="App">
