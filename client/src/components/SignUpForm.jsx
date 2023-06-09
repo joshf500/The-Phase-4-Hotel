@@ -14,7 +14,7 @@ function SignUpForm({ onSignUp }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestData = {
+    const requestSignUpData = {
       email,
       username,
       password,
@@ -25,7 +25,7 @@ function SignUpForm({ onSignUp }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestData),
+      body: JSON.stringify(requestSignupData),
     })
       .then((response) => {
         if (response.ok) {

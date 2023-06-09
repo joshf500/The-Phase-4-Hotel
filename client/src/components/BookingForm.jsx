@@ -16,7 +16,7 @@ function BookingForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestData = {
+    const requestBookingData = {
       people,
       check_in: checkIn.toISOString(),
       check_out: checkOut.toISOString(),

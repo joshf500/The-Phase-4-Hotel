@@ -16,10 +16,10 @@ function Login({ onLogin }) {
 
     if (activeForm === "login") {
       url = "/login";
-      requestData = { username, password };
+      requestLoginData = { username, password };
     } else if (activeForm === "signup") {
       url = "/signup";
-      requestData = { username, password };
+      requestLoginData = { username, password };
     }
 
     fetch(url, {
