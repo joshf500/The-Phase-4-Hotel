@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../styles/Bookings.css";
 
 function BookingForm() {
   const [people, setPeople] = useState("");
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
-  const [roomId, setRoomId] = useState(""); // State to hold the selected room ID
+  const [roomId, setRoomId] = useState("");
+  const [username, setUsername] = useState("");
+  const [numNights, setNumNights] = useState("");
+  const [totalCost, setTotalCost] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,10 +20,26 @@ function BookingForm() {
       people,
       check_in: checkIn.toISOString(),
       check_out: checkOut.toISOString(),
-      room_id: roomId, // Assign the selected room ID
+      room_id: roomId,
     };
 
+    // Simulate an API request
+    setTimeout(() => {
+      // Display the success notification
+      toast.success(
+        `Your room is now reserved:
+        User Name: ${username}
+        Nights: ${numNights}
+        Total Cost: ${totalCost}`
+      );
+    }, 1000);
+  };
 
+  const handleRoomChange = (e) => {
+    const selectedRoomId = e.target.value;
+    const selectedRoom = rooms.find((room) => room.id === selectedRoomId);
+    setRoomId(selectedRoomId);
+    setTotalCost(selectedRoom.price_per_night * numNights);
   };
 
   return (
@@ -73,16 +94,17 @@ function BookingForm() {
           className="BookingInput"
           required
           value={roomId}
-          onChange={(e) => setRoomId(e.target.value)}
+          onChange={handleRoomChange}
         >
           <option value="">Select a room</option>
-    
           {/* Add more room options as needed */}
         </select>
       </div>
       <button type="submit" className="BookingButton">
         Book Reservation
       </button>
+
+      <ToastContainer />
     </form>
   );
 }
