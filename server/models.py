@@ -2,9 +2,10 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
-
+# from datetime import date
 from config import db, bcrypt
-
+from datetime import date
+import re
 # Models go here!
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
@@ -33,7 +34,15 @@ class User(db.Model, SerializerMixin):
     def authenticate(self, password):
         return bcrypt.check_password_hash(
             self._password_hash, password.encode('utf-8'))
-
+    
+    @validates("email")
+    def validate_email(self,key,email):
+        pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        if re.match(pattern, email) is not None:
+            return email
+        raise ValueError("Must be proper email format!")
+        
+        
     def __repr__(self):
         return f'<User {self.username}>'
 
@@ -49,7 +58,7 @@ class Room(db.Model, SerializerMixin):
     couch_pullout_beds = db.Column(db.Integer)
     special_view = db.Column(db.String)
     image_url = db.Column(db.String)
-    available = db.Column(db.Boolean)
+    available = db.Column(db.Boolean, default=True)
 
     bookings =  db.relationship("Booking", back_populates="room")
     users = association_proxy("bookings","user")
@@ -67,6 +76,7 @@ class Booking(db.Model, SerializerMixin):
     people = db.Column(db.Integer)
     check_in = db.Column(db.Date)
     check_out = db.Column(db.Date)
+    num_nights = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     room_id = db.Column(db.Integer, db.ForeignKey("rooms.id"))
