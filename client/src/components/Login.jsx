@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SignUp from "./SignUpForm";
 import "../styles/Auth.css";
 
 function Login({ onLogin }) {
@@ -9,11 +8,11 @@ function Login({ onLogin }) {
   const [errors, setErrors] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
 
     let url;
-    let requestData;
+    let LoginData;
 
     if (activeForm === "login") {
       url = "/login";
@@ -28,7 +27,7 @@ function Login({ onLogin }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestData),
+      body: JSON.stringify(LoginData),
     })
       .then((response) => {
         if (response.ok) {
@@ -45,14 +44,13 @@ function Login({ onLogin }) {
       });
   };
 
-  const handleClick = () => {
+  const handleLoginClick = () => {
     setIsLoggedIn(true); // Update login status
   };
 
   return (
 
     <div> 
-        <SignUp />
       <section className="auth-forms-section">
         <h1 className="auth-section-title">your getaway awaits</h1>
         <div className="auth-forms">
@@ -65,7 +63,7 @@ function Login({ onLogin }) {
               Login
               <span className="auth-title-underline"></span>
             </button>
-            <form className="AuthForm form-login" onSubmit={handleSubmit}>
+            <form className="AuthForm form-login" onSubmit={handleLoginSubmit}>
               <fieldset>
                 <div className="input-block">
                   <label htmlFor="login-username">Username</label>
@@ -90,7 +88,7 @@ function Login({ onLogin }) {
                   />
                 </div>
               </fieldset>
-              <button type="submit" className="btn-login" onClick={handleClick}>Login</button>
+              <button type="submit" className="btn-login" onClick={handleLoginClick}>Login</button>
             </form>
           </div>
         </div>
@@ -104,3 +102,5 @@ function Login({ onLogin }) {
 }
 
 export default Login;
+
+
