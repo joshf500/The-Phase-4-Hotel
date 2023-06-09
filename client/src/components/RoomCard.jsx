@@ -9,7 +9,9 @@ function RoomCard() {
       .then((response) => response.json())
       .then((data) => {
         setRooms(data.rooms);
+        console.log(data)
       })
+    
       .catch((error) => {
         console.error("Error fetching room data:", error);
       });
@@ -18,7 +20,7 @@ function RoomCard() {
   const handleReserveClick = (room) => {
     // Placeholder logic for reserving the room
     console.log("Room reserved:", room);
-    
+  
   };
 
   return (
