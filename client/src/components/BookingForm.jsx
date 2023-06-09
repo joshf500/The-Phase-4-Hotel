@@ -18,7 +18,6 @@ function BookingForm() {
       room_id: roomId, // Assign the selected room ID
     };
 
-    // Rest of the code...
 
   };
 
@@ -77,8 +76,7 @@ function BookingForm() {
           onChange={(e) => setRoomId(e.target.value)}
         >
           <option value="">Select a room</option>
-          <option value="1">Room 1</option>
-          <option value="2">Room 2</option>
+    
           {/* Add more room options as needed */}
         </select>
       </div>
