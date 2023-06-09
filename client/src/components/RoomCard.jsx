@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/RoomCards.css";
 
-function RoomCard({ room }) {
+function RoomCard() {
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
