@@ -19,11 +19,13 @@
 
 .auth-forms {
   display: flex;
+  justify-content: center; /* Center the forms horizontally */
   align-items: flex-start;
   margin-top: 30px;
 }
 
 .auth-form-wrapper {
+  flex-basis: 50%; /* Adjust the width as needed */
   animation: hideLayer .3s ease-out forwards;
 }
 
@@ -280,6 +282,7 @@
 
 /* Media Queries for Responsive Design */
 
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .auth-forms-section {
@@ -290,19 +293,15 @@
     font-size: 28px;
   }
 
-  .auth-forms {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
   .auth-form-wrapper {
-    flex-basis: 50%;
+    flex-basis: 100%; /* Adjust the width for small screens */
   }
 
   .AuthForm {
-    min-width: 300px;
+    min-width: 260px; /* Adjust the minimum width as needed */
   }
 }
+
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
