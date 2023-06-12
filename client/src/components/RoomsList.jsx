@@ -32,7 +32,7 @@ function RoomList() {
 
   return (
     <div id="RoomListContainer">
-      <ul>{arrayOfRooms}</ul>
+      <ul className="room-grid">{arrayOfRooms}</ul>
     </div>
   );
 }

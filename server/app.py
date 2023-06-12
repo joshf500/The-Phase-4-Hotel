@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+    #!/usr/bin/env python3
 
 # Standard library imports
 
@@ -16,6 +16,7 @@ from datetime import date
 #Global functions
 def parse_date(datestring):
     return date(int(datestring[:4]),int(datestring[5:7]),int(datestring[8:]))
+# taking date string into an integer and its saying that we can't do that, trying to convert a time stamp into a date
 
 # Views go here!
 class Signup(Resource):

@@ -4,12 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-  background: #7096bb;
-}
-
 .auth-forms-section {
   display: flex;
   flex-direction: column;

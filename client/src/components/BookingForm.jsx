@@ -1,111 +1,155 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState, useEffect } from "react";
 import "../styles/Bookings.css";
 
 function BookingForm() {
-  const [people, setPeople] = useState("");
+  const [people, setPeople] = useState(0);
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
   const [roomId, setRoomId] = useState("");
-  const [username, setUsername] = useState("");
-  const [numNights, setNumNights] = useState("");
-  const [totalCost, setTotalCost] = useState("");
+  const [rooms, setRooms] = useState([]);
+  const [bookingConfirmed, setBookingConfirmed] = useState(false);
+
+  // fetching data to data of rooms
+
+  useEffect(() => {
+    fetch("/see_rooms")
+      .then((response) => response.json())
+      .then((data) => {
+        setRooms(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching room data:", error);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const requestBookingData = {
+    
+   
+    setCheckIn(checkIn=>e.target["check_in"].value)
+    setCheckOut(checkOut=>e.target["check_out"].value)
+    console.log(checkIn)
+    console.log(checkOut)
+    const requestData = {
       people,
-      check_in: checkIn.toISOString(),
-      check_out: checkOut.toISOString(),
-      room_id: roomId,
+      check_in: e.target["check_in"].value,
+      check_out: e.target["check_out"].value,
+      room_id: roomId, // Assign the selected room ID
     };
-
-    // Simulate an API request
-    setTimeout(() => {
-      // Display the success notification
-      toast.success(
-        `Your room is now reserved:
-        User Name: ${username}
-        Nights: ${numNights}
-        Total Cost: ${totalCost}`
-      );
-    }, 1000);
-  };
-
-  const handleRoomChange = (e) => {
-    const selectedRoomId = e.target.value;
-    const selectedRoom = rooms.find((room) => room.id === selectedRoomId);
-    setRoomId(selectedRoomId);
-    setTotalCost(selectedRoom.price_per_night * numNights);
+    
+    
+    console.log(requestData)
+    fetch("/book", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response from the server
+        console.log("Reservation created:", data);
+        setBookingConfirmed(true);
+      })
+      .catch((error) => {
+        console.error("Error creating reservation:", error);
+      });
   };
 
   return (
-    <form className="BookingForm" onSubmit={handleSubmit}>
-      <h2>Book a Reservation</h2>
-      <div>
-        <label htmlFor="people" className="BookingInput">
-          Number of People
-        </label>
-        <input
-          id="people"
-          className="BookingInput"
-          type="number"
-          min="1"
+    <div className="BookingFormContainer">
+      <form className="BookingForm" onSubmit={handleSubmit}>
+        <h2>Book a Reservation</h2>
+        {bookingConfirmed ? (
+          <p>Your booking is confirmed! </p>
+        ) : null}
+        <div>
+          <label htmlFor="people" className="BookingInput">
+            Number of People
+          </label>
+          <input
+            id="people"
+            className="BookingInput"
+            type="number"
+            min="1"
+            max="6"
+            required
+            value={people}
+            onChange={(e) => setPeople(e.target.value)}
+          />
+        </div>
+        
+      {/*  <div>
+          <label htmlFor="checkIn" className="BookingInput">
+            Check-in Date
+          </label>
+          <DatePicker
+            id="checkIn"
+            className="BookingInput datepicker"
+            selected={checkIn}
+            onChange={(date) => setCheckIn(date)}
+            dateFormat="yyyy-MM-dd"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="checkOut" className="BookingInput">
+            Check-out Date
+          </label>
+          <DatePicker
+            id="checkOut"
+            className="BookingInput datepicker"
+            selected={checkOut}
+            onChange={(date) => setCheckOut(date)}
+            dateFormat="yyyy-MM-dd"
+            required
+          />
+        </div> */}
+        <div>
+        <label htmlFor="checkin date" className="BookingInput">
+            check in date 
+          </label>
+          <input
+          type="date"
+          name="check_in"
           required
-          value={people}
-          onChange={(e) => setPeople(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="checkIn" className="BookingInput">
-          Check-in Date
-        </label>
-        <DatePicker
-          id="checkIn"
-          className="BookingInput datepicker"
-          selected={checkIn}
-          onChange={(date) => setCheckIn(date)}
-          dateFormat="yyyy-MM-dd"
+          />
+        </div>
+        <div>
+        <label htmlFor="checkout date" className="BookingInput">
+            check out date 
+          </label>
+          <input
+          type="date"
+          name="check_out"
           required
-        />
-      </div>
-      <div>
-        <label htmlFor="checkOut" className="BookingInput">
-          Check-out Date
-        </label>
-        <DatePicker
-          id="checkOut"
-          className="BookingInput datepicker"
-          selected={checkOut}
-          onChange={(date) => setCheckOut(date)}
-          dateFormat="yyyy-MM-dd"
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="room" className="BookingInput">
-          Select Room
-        </label>
-        <select
-          id="room"
-          className="BookingInput"
-          required
-          value={roomId}
-          onChange={handleRoomChange}
-        >
-          <option value="">Select a room</option>
-          {/* Add more room options as needed */}
-        </select>
-      </div>
-      <button type="submit" className="BookingButton">
-        Book Reservation
-      </button>
-
-      <ToastContainer />
-    </form>
+          />
+        </div>
+        <div>
+          <label htmlFor="room" className="BookingInput">
+            Select Room
+          </label>
+          <select
+            id="room"
+            className="BookingInput"
+            required
+            value={roomId}
+            onChange={(e) => setRoomId(e.target.value)}
+          >
+            <option value="">Select a room</option>
+            {rooms.map((room) => (
+              <option key={room.id} value={room.id}>
+                {room.room_number}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button type="submit" className="BookingButton">
+          Book Reservation
+        </button>
+      </form>
+    </div>
   );
 }
 

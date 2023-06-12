@@ -1,12 +1,12 @@
 :root {
-    background-color: #97bdd3;
+    background-color: #eccf9d;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
 	margin: 0;
 	font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-	background:#97bdd3;
+	background:#eccf9d;
 }
 
 .card {

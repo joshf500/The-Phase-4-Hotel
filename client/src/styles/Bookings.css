@@ -1,6 +1,24 @@
 /* booking form */
 .BookingForm {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.BookingFormContainer {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(255, 149, 28, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  max-width: 500px; /* Adjust max-width as needed */
+  margin: 0 auto; /* Center the form horizontally */
+  box-sizing: border-box; /* Include padding in the width */
 }
 
 .BookingForm h2 {
@@ -18,18 +36,14 @@
   margin-bottom: 5px;
 }
 
-.BookingForm input[type="number"] {
+.BookingForm input[type="number"],
+.BookingForm .datepicker,
+.BookingForm select {
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
-}
-
-.BookingForm .datepicker {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  box-sizing: border-box; /* Include padding in the width */
 }
 
 .BookingForm button {
@@ -46,51 +60,79 @@
 }
 
 
-/* code for RoomCards, the classnames need to be updated */
+/* code for RoomCards */
 
-.card {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 20px;
+#RoomListContainer {
+  margin: 10%;
+  margin-top: 5%
+}
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Update the number of columns as needed */
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .room-grid {
+    grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns for medium-sized screens */
   }
-  
-  .card img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+}
+
+@media (min-width: 1200px) {
+  .room-grid {
+    grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns for large screens */
   }
-  
-  .card h4 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .card p {
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-  
-  .card button {
-    padding: 8px 16px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .card button.primary {
-    background-color: #ff8c00;
-  }
-  
-  .card form {
-    margin-top: 10px;
-  }
-  
+}
+
+.room-card {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(255, 149, 28, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.room-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.room-card h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.room-card p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.room-card button {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.room-card button.choose-room-button {
+  background-color: #ff8c00;
+}
+
+.room-card form {
+  margin-top: 10px;
+}
+
+
+
 
 
 /*  below is for RoomFilter
